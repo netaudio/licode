@@ -18,7 +18,7 @@ global.config.erizoController.maxVideoBW = global.config.erizoController.maxVide
 global.config.erizoController.publicIP = global.config.erizoController.publicIP || '';
 global.config.erizoController.hostname = global.config.erizoController.hostname || '';
 global.config.erizoController.port = global.config.erizoController.port || 8080;
-global.config.erizoController.ssl = global.config.erizoController.ssl || false;
+global.config.erizoController.ssl = global.config.erizoController.ssl || true;
 global.config.erizoController.ssl_key =
   global.config.erizoController.ssl_key || '../../cert/key.pem';
 global.config.erizoController.ssl_cert =
@@ -26,7 +26,7 @@ global.config.erizoController.ssl_cert =
 global.config.erizoController.sslCaCerts =
   global.config.erizoController.sslCaCerts || undefined;
 global.config.erizoController.listen_port = global.config.erizoController.listen_port || 8080;
-global.config.erizoController.listen_ssl = global.config.erizoController.listen_ssl || false;
+global.config.erizoController.listen_ssl = global.config.erizoController.listen_ssl || true;
 global.config.erizoController.turnServer = global.config.erizoController.turnServer || undefined;
 global.config.erizoController.warning_n_rooms = global.config.erizoController.warning_n_rooms || 15;
 global.config.erizoController.limit_n_rooms = global.config.erizoController.limit_n_rooms || 20;
@@ -131,10 +131,12 @@ if (global.config.erizoController.listen_ssl) {
     });
   }
   server = https.createServer(options);
+  log.info('create https server');
 } else {
   // eslint-disable-next-line global-require
   const http = require('http');
   server = http.createServer();
+  log.info('create http server');
 }
 
 server.listen(global.config.erizoController.listen_port);
@@ -188,6 +190,8 @@ const addToCloudHandler = (callback) => {
   }
 
   const startKeepAlives = (erizoControllerId, erizoPublicIP) => {
+    log.info('startKeepAlives: ' + erizoControllerId);
+
     const intervalId = setInterval(() => {
       nuve.keepAlive(erizoControllerId)
         .then(() => true)

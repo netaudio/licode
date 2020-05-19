@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 SCRIPT=`pwd`/$0
-ROOT=/opt/licode
+# ROOT=/opt/licode
+ROOT=/root/opensource/licode
 SCRIPTS="$ROOT"/scripts
 BUILD_DIR="$ROOT"/build
 DB_DIR="$BUILD_DIR"/db

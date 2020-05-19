@@ -79,11 +79,12 @@ install_apt_deps(){
   npm install -g node-gyp
   npm install gulp@3.9.1 gulp-eslint@3 run-sequence@2.2.1 webpack-stream@4.0.0 google-closure-compiler-js@20170521.0.0 del@3.0.0 gulp-sourcemaps@2.6.4 script-loader@0.7.2 expose-loader@0.7.5
   sudo apt-get update -y
-  sudo apt-get install -qq python-software-properties -y
+  sudo apt-get install -qq python3-software-properties -y
   sudo apt-get install -qq software-properties-common -y
   sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   sudo apt-get update -y
-  sudo apt-get install -qq git make gcc-5 g++-5 python3-pip libssl-dev cmake libglib2.0-dev pkg-config liblog4cxx10-dev rabbitmq-server mongodb curl -y
+  # sudo apt-get install -qq git make gcc-5 g++-5 python3-pip libssl-dev cmake libglib2.0-dev pkg-config liblog4cxx10-dev rabbitmq-server mongodb curl -y
+  sudo apt-get install -qq git make gcc-5 g++-5 python3-pip libssl-dev cmake pkg-config liblog4cxx-dev rabbitmq-server mongodb curl -y
   sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 --slave /usr/bin/g++ g++ /usr/bin/g++-5
 
   sudo chown -R `whoami` ~/.npm ~/tmp/ || true

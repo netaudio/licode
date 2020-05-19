@@ -90,7 +90,10 @@ exports.assignErizoControllerToRoom = function(room, erizoControllerId, callback
  * Updates a determined room
  */
 exports.updateRoom = (id, room, callback) => {
-  db.rooms.update({ _id: db.ObjectId(id) }, room, (error) => {
+  log.warn('message: updateRoom error,id: ' + id);
+  log.warn('room: ' + JSON.stringify(room));
+  // db.rooms.update({ _id: db.ObjectId(id) }, room, (error) => {
+  db.rooms.save(room, (error) => {
     if (error) log.warn(`message: updateRoom error, ${logger.objectToLog(error)}`);
     if (callback) callback(error);
   });
